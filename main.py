@@ -2,15 +2,13 @@
 
 def parallel_processing(n, m, data):
     output = []
-    jobs = list(enumerate(data))
-    finish_times = [0] * n
-    for job in jobs:
-        earliest_finish_time = min(finish_times)
-        earliest_finish_thread = finish_times.index(earliest_finish_time)
-        finish_times[earliest_finish_thread] += job[1]
-        output.append((job[0], earliest_finish_thread))
-        
+    threads = [(i, 0) for i in range(n)] 
+    for i in range(m):
+        thread = min(threads, key=lambda x: x[1]) 
+        output.append((i, thread[0])) 
+        threads[thread[0]] = (thread[0], thread[1] + data[i]) 
     return output
+
 
 def main():
    
