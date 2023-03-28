@@ -1,20 +1,18 @@
 # python3
 
-def parallel_processing(n, m, data):
-    output = []
-    threads = [(i, 0) for i in range(n)] 
-    for i in range(m):
-        thread = min(threads, key=lambda x: x[1]) 
-        output.append((i, thread[0])) 
-        threads[thread[0]] = (thread[0], thread[1] + data[i]) 
-    return output
-
+def parallel_processing(n, m):
+    assigned_jobs = [[] for _ in range(n)]
+    threads = [(i, 0) for i in range(n)]
+    for job inm:
+        thread_id, completion_time = min(threads, key=lambda x: (x[1], x[0]))
+        assigned_jobs[thread_id].append(completion_time)
+        threads[thread_id] = (thread_id, completion_time + job)
+    return assigned_jobs
 
 def main():
-   
     n, m = map(int, input().split())
-    data = list(map(int, input().split()))
-    result = parallel_processing(n, m, data)
+    m = list(map(int, input().split()))
+    result = parallel_processing(n, m)
     for pair in result:
         print(pair[0], pair[1])
 
