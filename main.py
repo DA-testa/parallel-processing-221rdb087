@@ -13,8 +13,11 @@ def main():
     n, m = map(int, input().split())
     m = list(map(int, input().split()))
     result = parallel_processing(n, m)
-    for pair in result:
-        print(pair[0], pair[1])
+    for times in result:
+        for time in times:
+            print(time, end=' ')
+        print()
+
 
 if __name__ == "__main__":
     main()
