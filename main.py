@@ -3,7 +3,7 @@
 def parallel_processing(n, m):
     assigned_jobs = [[] for _ in range(n)]
     threads = [(i, 0) for i in range(n)]
-    for job inm:
+    for job in m:
         thread_id, completion_time = min(threads, key=lambda x: (x[1], x[0]))
         assigned_jobs[thread_id].append(completion_time)
         threads[thread_id] = (thread_id, completion_time + job)
